@@ -1,11 +1,9 @@
 package com.example.grow
 
-import android.arch.lifecycle.LiveData
 import androidx.annotation.WorkerThread
+import androidx.lifecycle.LiveData
 
-class AppRepository(appDatabase: AppDatabase) {
-
-    private val exerciseDao = appDatabase.exerciseDao()
+class ExerciseRepository(private val exerciseDao: ExerciseDao) {
 
     val allExercises: LiveData<List<Exercise>> = exerciseDao.getAll()
 
