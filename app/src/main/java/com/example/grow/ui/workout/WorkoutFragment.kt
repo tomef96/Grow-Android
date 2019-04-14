@@ -31,7 +31,7 @@ class WorkoutFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(WorkoutViewModel::class.java)
         // TODO: Use the ViewModel
-        val recyclerView = activity!!.findViewById<RecyclerView>(R.id.recyclerview)
+        val recyclerView: RecyclerView = activity!!.findViewById(R.id.recyclerview)
         val adapter = ExerciseListAdapter(context!!)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context!!)
@@ -40,6 +40,8 @@ class WorkoutFragment : Fragment() {
             // Update the cached copy of the words in the adapter.
             exercises?.let { adapter.setExercises(it) }
         })
+
+
     }
 
 }

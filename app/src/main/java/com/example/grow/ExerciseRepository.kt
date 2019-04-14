@@ -11,4 +11,9 @@ class ExerciseRepository(private val exerciseDao: ExerciseDao) {
     suspend fun insert(exercise: Exercise) {
         exerciseDao.insert(exercise)
     }
+
+    @WorkerThread
+    suspend fun findByID(id: Int): LiveData<Exercise> {
+        return exerciseDao.findByID(id)
+    }
 }

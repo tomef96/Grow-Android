@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 // https://codelabs.developers.google.com/codelabs/android-room-with-a-view-kotlin/#10
@@ -19,6 +20,11 @@ class ExerciseListAdapter internal constructor(
         val name: TextView = itemView.findViewById(R.id.exerciseName)
         val sets: TextView = itemView.findViewById(R.id.exerciseSets)
         val reps: TextView = itemView.findViewById(R.id.exerciseReps)
+        init {
+            itemView.setOnClickListener {
+                Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewHolder {
