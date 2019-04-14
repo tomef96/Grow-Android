@@ -9,24 +9,28 @@ import androidx.recyclerview.widget.RecyclerView
 
 // https://codelabs.developers.google.com/codelabs/android-room-with-a-view-kotlin/#10
 class ExerciseListAdapter internal constructor(
-    context: Context
+    private val context: Context
 ) : RecyclerView.Adapter<ExerciseListAdapter.ExerciseViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var exercises = emptyList<Exercise>()
 
     inner class ExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val exerciseItemView: TextView = itemView.findViewById(R.id.exerciseView)
+        val name: TextView = itemView.findViewById(R.id.exerciseName)
+        val sets: TextView = itemView.findViewById(R.id.exerciseSets)
+        val reps: TextView = itemView.findViewById(R.id.exerciseReps)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewHolder {
-        val itemView = inflater.inflate(R.layout.recyclerview_exercise_item, parent, false)
+        val itemView = inflater.inflate(R.layout.recyclerview_item_exercise, parent, false)
         return ExerciseViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: ExerciseViewHolder, position: Int) {
         val current = exercises[position]
-        holder.exerciseItemView.text = current.name
+        holder.name.text = context.getString(R.string.exercise_name, current.name)
+        holder.sets.text = context.getString(R.string.exercise_sets, current.sets)
+        holder.reps.text = context.getString(R.string.exercise_reps, current. reps)
     }
 
     internal fun setExercises(exercises: List<Exercise>) {

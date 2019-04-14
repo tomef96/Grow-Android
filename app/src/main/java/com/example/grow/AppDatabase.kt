@@ -49,10 +49,16 @@ abstract class AppDatabase : RoomDatabase() {
         fun populateDatabase(exerciseDao: ExerciseDao) {
             exerciseDao.deleteAll()
 
-            var word = Exercise(420, "Barbell Bench Press", 3, 12)
-            exerciseDao.insert(word)
-            word = Exercise(69, "Barbell Rows", 4, 8)
-            exerciseDao.insert(word)
+            var exercise = Exercise(420, "Barbell Bench Press", 3, 12)
+            exerciseDao.insert(exercise)
+            exercise = Exercise(69, "Barbell Rows", 4, 8)
+            exerciseDao.insert(exercise)
+            exercise = Exercise(42069, "Pull Ups", 2, 15)
+            exerciseDao.insert(exercise)
+            exercise = Exercise(69420, "Hammer Curls", 5, 12)
+            exerciseDao.insert(exercise)
+            exercise = Exercise(1337, "Calf Raise", 5, 20)
+            exerciseDao.insert(exercise)
         }
     }
 
