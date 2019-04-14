@@ -6,11 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.grow.ExerciseListAdapter
+import com.example.grow.Exercise
+import com.example.grow.MainActivity
+import com.example.grow.ui.exercise.ExerciseListAdapter
 import com.example.grow.R
+import com.example.grow.ui.exercise.ExerciseFragment
 
 class WorkoutFragment : Fragment() {
 
@@ -29,19 +33,24 @@ class WorkoutFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(WorkoutViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel = activity?.run {
+            ViewModelProviders.of(this).get(WorkoutViewModel::class.java)
+        }?: throw Exception("Invalid Activity")
         val recyclerView: RecyclerView = activity!!.findViewById(R.id.recyclerview)
-        val adapter = ExerciseListAdapter(context!!)
+        val adapter = ExerciseListAdapter(context!!, this::setSelected)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context!!)
 
         viewModel.allExercises.observe(this, Observer { exercises ->
-            // Update the cached copy of the words in the adapter.
             exercises?.let { adapter.setExercises(it) }
         })
+    }
 
-
+    private fun setSelected(exercise: Exercise): Boolean {
+        viewModel.selected = exercise
+        val activity = activity as MainActivity
+        activity.setFragment(ExerciseFragment.newInstance())
+        return true
     }
 
 }

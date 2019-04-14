@@ -2,6 +2,7 @@ package com.example.grow
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import com.example.grow.ui.workout.WorkoutFragment
 
 class MainActivity : AppCompatActivity() {
@@ -16,4 +17,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun setFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
 }

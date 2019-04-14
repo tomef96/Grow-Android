@@ -17,6 +17,7 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
 
     private val repository: ExerciseRepository
     val allExercises: LiveData<List<Exercise>>
+    var selected: Exercise? = null
 
     private var parentJob = Job()
 

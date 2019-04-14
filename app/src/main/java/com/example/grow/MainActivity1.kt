@@ -6,8 +6,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.grow.ui.exercise.ExerciseListAdapter
 
-class MainActivity1 : AppCompatActivity() {
+/*class MainActivity1 : AppCompatActivity() {
 
     private lateinit var exerciseViewModel: ExerciseViewModel
 
@@ -27,4 +28,4 @@ class MainActivity1 : AppCompatActivity() {
         })
     }
 
-}
+}*/
