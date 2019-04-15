@@ -18,6 +18,8 @@ import com.example.grow.ui.exercise.ExerciseFragment
 
 class WorkoutFragment : Fragment() {
 
+    lateinit var recyclerView: RecyclerView
+
     companion object {
         fun newInstance() = WorkoutFragment()
     }
@@ -36,7 +38,7 @@ class WorkoutFragment : Fragment() {
         viewModel = activity?.run {
             ViewModelProviders.of(this).get(WorkoutViewModel::class.java)
         }?: throw Exception("Invalid Activity")
-        val recyclerView: RecyclerView = activity!!.findViewById(R.id.recyclerview)
+        recyclerView = activity!!.findViewById(R.id.recyclerview)
         val adapter = ExerciseListAdapter(context!!, this::setSelected)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context!!)
@@ -44,6 +46,13 @@ class WorkoutFragment : Fragment() {
         viewModel.allExercises.observe(this, Observer { exercises ->
             exercises?.let { adapter.setExercises(it) }
         })
+        activity?.setTitle(R.string.toolbar_title_workout)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        val listState = recyclerView.layoutManager?.onSaveInstanceState()
+        outState.putParcelable("list_state", listState)
     }
 
     private fun setSelected(exercise: Exercise): Boolean {
@@ -51,6 +60,10 @@ class WorkoutFragment : Fragment() {
         val activity = activity as MainActivity
         activity.setFragment(ExerciseFragment.newInstance())
         return true
+    }
+
+    interface OnWorkoutSelectedListener {
+        fun onExerciseSelected(position: Int)
     }
 
 }

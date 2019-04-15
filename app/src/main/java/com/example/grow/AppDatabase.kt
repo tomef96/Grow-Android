@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [Exercise::class], version = 1)
+@Database(entities = [Exercise::class], version = 2)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun exerciseDao(): ExerciseDao
@@ -26,7 +26,7 @@ abstract class AppDatabase : RoomDatabase() {
                     context,
                     AppDatabase::class.java,
                     "grow-db"
-                ).addCallback(ExerciseDatabaseCallback(scope)).build()
+                ).fallbackToDestructiveMigration().addCallback(ExerciseDatabaseCallback(scope)).build()
                 INSTANCE = instance
                 return instance
             }

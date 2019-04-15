@@ -43,6 +43,8 @@ class ExerciseFragment : Fragment() {
             ViewModelProviders.of(this).get(WorkoutViewModel::class.java)
         }?: throw Exception("Invalid Activity")
         exercise = viewModel.selected!!
+
+        activity?.setTitle(R.string.toolbar_title_exercise)
     }
 
     private fun populate(view: View) {
