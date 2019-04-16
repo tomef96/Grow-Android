@@ -10,7 +10,7 @@ import android.widget.TextView
 import com.example.grow.Exercise
 
 import com.example.grow.R
-import com.example.grow.ui.workout.WorkoutViewModel
+import com.example.grow.ui.workout.WorkoutExerciseViewModel
 
 
 class ExerciseFragment : Fragment() {
@@ -22,7 +22,7 @@ class ExerciseFragment : Fragment() {
     lateinit var sets: TextView
     lateinit var reps: TextView
 
-    private lateinit var viewModel: WorkoutViewModel
+    private lateinit var viewModel: WorkoutExerciseViewModel
 
     companion object {
         fun newInstance() = ExerciseFragment()
@@ -40,7 +40,7 @@ class ExerciseFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = activity?.run {
-            ViewModelProviders.of(this).get(WorkoutViewModel::class.java)
+            ViewModelProviders.of(this).get(WorkoutExerciseViewModel::class.java)
         }?: throw Exception("Invalid Activity")
         exercise = viewModel.selected!!
 

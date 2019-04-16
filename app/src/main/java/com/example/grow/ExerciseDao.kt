@@ -7,7 +7,8 @@ import androidx.room.Insert
 import androidx.room.Query
 
 @Dao
-interface ExerciseDao {
+interface ExerciseDao : MyDao<Exercise> {
+
     @Query("SELECT * FROM exercise")
     fun getAll(): LiveData<List<Exercise>>
 
@@ -17,9 +18,4 @@ interface ExerciseDao {
     @Query("DELETE FROM exercise")
     fun deleteAll()
 
-    @Insert
-    fun insert(exercise: Exercise)
-
-    @Delete
-    fun delete(exercise: Exercise)
 }

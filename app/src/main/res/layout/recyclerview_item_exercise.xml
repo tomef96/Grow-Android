@@ -54,7 +54,7 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <!--<TextView
+                <TextView
                     android:id="@+id/rc_item_ex_btn1"
                     style="@style/set_done_btn" />
                 <TextView
@@ -62,7 +62,7 @@
                     style="@style/set_done_btn" />
                 <TextView
                     android:id="@+id/rc_item_ex_btn3"
-                    style="@style/set_done_btn" />-->
+                    style="@style/set_done_btn" />
             </LinearLayout>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

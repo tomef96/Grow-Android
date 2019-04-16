@@ -6,17 +6,14 @@ import androidx.room.Insert
 import androidx.room.Query
 
 @Dao
-interface WorkoutDao {
+interface WorkoutDao : MyDao<Workout> {
 
     @Query("SELECT * FROM workout")
     fun getAll(): List<Workout>
 
     @Query("SELECT * FROM workout WHERE id LIKE :id")
-    fun findById(id: Int): Workout
+    fun findByID(id: Int): Workout
 
-    @Insert
-    fun insert(workout: Workout)
-
-    @Delete
-    fun delete(workout: Workout)
+    @Query("DELETE FROM workout")
+    fun deleteAll()
 }

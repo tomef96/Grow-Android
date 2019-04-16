@@ -9,10 +9,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [Exercise::class], version = 2)
+@Database(entities = [Exercise::class, Workout::class], version = 3, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun exerciseDao(): ExerciseDao
+    abstract fun workoutDao(): WorkoutDao
 
     // https://codelabs.developers.google.com/codelabs/android-room-with-a-view-kotlin/#6
     companion object {
@@ -42,6 +43,7 @@ abstract class AppDatabase : RoomDatabase() {
             INSTANCE?.let { database ->
                 scope.launch(Dispatchers.IO) {
                     populateDatabase(database.exerciseDao())
+                    populateDatabase(database.workoutDao())
                 }
             }
         }
@@ -59,6 +61,13 @@ abstract class AppDatabase : RoomDatabase() {
             exerciseDao.insert(exercise)
             exercise = Exercise(1337, "Calf Raise", 5, 20)
             exerciseDao.insert(exercise)
+        }
+
+        fun populateDatabase(workoutDao: WorkoutDao) {
+            workoutDao.deleteAll()
+
+            var workout = Workout(420, "Monday", "Chest", 1)
+            workoutDao.insert(workout)
         }
     }
 

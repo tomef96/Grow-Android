@@ -7,5 +7,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class Workout(
     @PrimaryKey val id: Int,
-    @ColumnInfo(name = "exercises") val exercises: List<Exercise>
+    @ColumnInfo(name = "day") val day: String,
+    @ColumnInfo(name = "muscle_groups") val muscleGroups: String,
+    @ColumnInfo(name = "exerciseID") val exerciseID: Int
 )

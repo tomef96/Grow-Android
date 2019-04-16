@@ -1,24 +1,26 @@
-package com.example.grow
+package com.example.grow.ui.workout
 
 import android.app.Application
+import android.widget.TextView
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.recyclerview.widget.RecyclerView
+import com.example.grow.AppDatabase
+import com.example.grow.Exercise
+import com.example.grow.ExerciseRepository
+import com.example.grow.MyViewModel
+import com.example.grow.ui.exercise.ExerciseListAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class ExerciseViewModel(application: Application) : AndroidViewModel(application) {
+class WorkoutExerciseViewModel(application: Application) : MyViewModel(application) {
 
-    private val repository: ExerciseRepository
+    val repository: ExerciseRepository
     val allExercises: LiveData<List<Exercise>>
-
-    private var parentJob = Job()
-
-    private val coroutineContext: CoroutineContext get() = parentJob + Dispatchers.Main
-
-    private val scope = CoroutineScope(coroutineContext)
+    var selected: Exercise? = null
 
     init {
         val exerciseDao = AppDatabase.getInstance(application, scope).exerciseDao()

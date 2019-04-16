@@ -2,11 +2,12 @@ package com.example.grow.ui.workout
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.os.Parcelable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,19 +25,21 @@ class WorkoutFragment : Fragment() {
         fun newInstance() = WorkoutFragment()
     }
 
-    private lateinit var viewModel: WorkoutViewModel
+    private lateinit var viewModel: WorkoutExerciseViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.workout_fragment, container, false)
+        val view = inflater.inflate(R.layout.workout_fragment, container, false)
+
+        return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = activity?.run {
-            ViewModelProviders.of(this).get(WorkoutViewModel::class.java)
+            ViewModelProviders.of(this).get(WorkoutExerciseViewModel::class.java)
         }?: throw Exception("Invalid Activity")
         recyclerView = activity!!.findViewById(R.id.recyclerview)
         val adapter = ExerciseListAdapter(context!!, this::setSelected)
@@ -47,12 +50,7 @@ class WorkoutFragment : Fragment() {
             exercises?.let { adapter.setExercises(it) }
         })
         activity?.setTitle(R.string.toolbar_title_workout)
-    }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        val listState = recyclerView.layoutManager?.onSaveInstanceState()
-        outState.putParcelable("list_state", listState)
     }
 
     private fun setSelected(exercise: Exercise): Boolean {
