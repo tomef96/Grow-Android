@@ -1,8 +1,11 @@
 package com.example.grow
 
-class Workout(private val exercises: ArrayList<Exercise>) {
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-    fun getExercise(id: Int): Exercise? {
-        return exercises.firstOrNull { exercise -> exercise.id == id }
-    }
-}
+@Entity
+data class Workout(
+    @PrimaryKey val id: Int,
+    @ColumnInfo(name = "exercises") val exercises: List<Exercise>
+)

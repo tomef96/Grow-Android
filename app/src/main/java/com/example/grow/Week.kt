@@ -1,7 +1,11 @@
 package com.example.grow
 
-import java.time.DayOfWeek
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-class Week(workouts: Map<DayOfWeek, Workout>) {
-
-}
+@Entity
+data class Week(
+    @PrimaryKey val id: Int,
+    @ColumnInfo(name = "workouts") val workouts: List<Workout>
+)
