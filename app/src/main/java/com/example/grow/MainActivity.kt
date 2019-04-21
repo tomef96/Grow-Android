@@ -3,7 +3,7 @@ package com.example.grow
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.example.grow.ui.exercise.ExerciseFragment
+import com.example.grow.ui.week.WeekFragment
 import com.example.grow.ui.workout.WorkoutFragment
 
 class MainActivity : AppCompatActivity() {
@@ -26,10 +26,13 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    /*fun setFragment(fragment: Fragment) {
+    fun setFragment(fragment: Fragment, workoutID: Int) {
+        val bundle = Bundle()
+        bundle.putInt("workoutID", workoutID)
+        fragment.arguments = bundle
         supportFragmentManager.beginTransaction()
             .replace(R.id.container, fragment)
             .addToBackStack(null)
             .commit()
-    }*/
+    }
 }

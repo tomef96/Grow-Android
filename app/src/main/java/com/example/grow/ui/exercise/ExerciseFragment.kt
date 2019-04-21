@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.example.grow.Exercise
+import com.example.grow.data.exercise.Exercise
 
 import com.example.grow.R
 import com.example.grow.ui.workout.WorkoutExerciseViewModel
@@ -42,7 +42,7 @@ class ExerciseFragment : Fragment() {
         viewModel = activity?.run {
             ViewModelProviders.of(this).get(WorkoutExerciseViewModel::class.java)
         }?: throw Exception("Invalid Activity")
-        exercise = viewModel.selected!!
+        exercise = viewModel.selected.value!!
 
         activity?.setTitle(R.string.toolbar_title_exercise)
     }

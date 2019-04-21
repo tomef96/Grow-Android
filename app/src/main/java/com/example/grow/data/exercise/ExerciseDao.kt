@@ -1,10 +1,9 @@
-package com.example.grow
+package com.example.grow.data.exercise
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
 import androidx.room.Query
+import com.example.grow.generic.MyDao
 
 @Dao
 interface ExerciseDao : MyDao<Exercise> {

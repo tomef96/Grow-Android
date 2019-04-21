@@ -1,6 +1,5 @@
-package com.example.grow
+package com.example.grow.generic
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 
 interface MyDao<T> {

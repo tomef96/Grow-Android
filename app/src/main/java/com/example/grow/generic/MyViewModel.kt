@@ -1,4 +1,4 @@
-package com.example.grow
+package com.example.grow.generic
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

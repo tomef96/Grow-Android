@@ -1,6 +1,10 @@
-package com.example.grow
+package com.example.grow.ui.week
 
 import android.app.Application
+import com.example.grow.data.AppDatabase
+import com.example.grow.generic.MyRepository
+import com.example.grow.generic.MyViewModel
+import com.example.grow.data.week.WeekRepository
 
 class WeekViewModel(application: Application) : MyViewModel(application) {
 

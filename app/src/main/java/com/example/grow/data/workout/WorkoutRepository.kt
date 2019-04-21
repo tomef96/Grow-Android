@@ -1,7 +1,7 @@
-package com.example.grow
+package com.example.grow.data.workout
 
 import androidx.annotation.WorkerThread
-import androidx.lifecycle.LiveData
+import com.example.grow.generic.MyRepository
 
 class WorkoutRepository(private val dao: WorkoutDao) : MyRepository<Workout>(dao) {
 

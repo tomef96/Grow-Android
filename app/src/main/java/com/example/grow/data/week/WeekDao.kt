@@ -1,4 +1,4 @@
-package com.example.grow
+package com.example.grow.data.week
 
 import androidx.room.Dao
 import androidx.room.Delete

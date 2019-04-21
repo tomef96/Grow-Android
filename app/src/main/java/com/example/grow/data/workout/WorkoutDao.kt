@@ -1,9 +1,8 @@
-package com.example.grow
+package com.example.grow.data.workout
 
 import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
 import androidx.room.Query
+import com.example.grow.generic.MyDao
 
 @Dao
 interface WorkoutDao : MyDao<Workout> {

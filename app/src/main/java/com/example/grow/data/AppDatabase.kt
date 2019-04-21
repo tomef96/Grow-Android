@@ -1,19 +1,24 @@
-package com.example.grow
+package com.example.grow.data
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.grow.data.exercise.Exercise
+import com.example.grow.data.exercise.ExerciseDao
+import com.example.grow.data.workout.Workout
+import com.example.grow.data.workout.WorkoutDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [Exercise::class, Workout::class], version = 3, exportSchema = false)
+@Database(entities = [Exercise::class, Workout::class, WorkoutExercise::class], version = 5, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun exerciseDao(): ExerciseDao
     abstract fun workoutDao(): WorkoutDao
+    abstract fun workoutExerciseDao(): WorkoutExerciseDao
 
     // https://codelabs.developers.google.com/codelabs/android-room-with-a-view-kotlin/#6
     companion object {
@@ -27,7 +32,11 @@ abstract class AppDatabase : RoomDatabase() {
                     context,
                     AppDatabase::class.java,
                     "grow-db"
-                ).fallbackToDestructiveMigration().addCallback(ExerciseDatabaseCallback(scope)).build()
+                ).fallbackToDestructiveMigration().addCallback(
+                    ExerciseDatabaseCallback(
+                        scope
+                    )
+                ).build()
                 INSTANCE = instance
                 return instance
             }
@@ -44,6 +53,7 @@ abstract class AppDatabase : RoomDatabase() {
                 scope.launch(Dispatchers.IO) {
                     populateDatabase(database.exerciseDao())
                     populateDatabase(database.workoutDao())
+                    populateDatabase(database.workoutExerciseDao())
                 }
             }
         }
@@ -52,6 +62,8 @@ abstract class AppDatabase : RoomDatabase() {
             exerciseDao.deleteAll()
 
             var exercise = Exercise(420, "Barbell Bench Press", 3, 12)
+            exerciseDao.insert(exercise)
+            exercise = Exercise(421, "Dips", 4, 15)
             exerciseDao.insert(exercise)
             exercise = Exercise(69, "Barbell Rows", 4, 8)
             exerciseDao.insert(exercise)
@@ -66,8 +78,21 @@ abstract class AppDatabase : RoomDatabase() {
         fun populateDatabase(workoutDao: WorkoutDao) {
             workoutDao.deleteAll()
 
-            var workout = Workout(420, "Monday", "Chest", 1)
+            var workout = Workout(420, "Monday", "Chest")
             workoutDao.insert(workout)
+            workout = Workout(69, "Tuesday", "Back")
+            workoutDao.insert(workout)
+        }
+
+        fun populateDatabase(workoutExerciseDao: WorkoutExerciseDao) {
+            workoutExerciseDao.deleteAll()
+
+            var workoutExercise = WorkoutExercise(420, 420)
+            workoutExerciseDao.insert(workoutExercise)
+            workoutExercise = WorkoutExercise(420, 421)
+            workoutExerciseDao.insert(workoutExercise)
+            workoutExercise = WorkoutExercise(69, 69)
+            workoutExerciseDao.insert(workoutExercise)
         }
     }
 

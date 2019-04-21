@@ -7,11 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.isEmpty
 import androidx.recyclerview.widget.RecyclerView
-import com.example.grow.Exercise
+import com.example.grow.data.exercise.Exercise
 import com.example.grow.R
-import com.example.grow.ui.workout.WorkoutFragment
-import java.lang.Exception
 
 // https://codelabs.developers.google.com/codelabs/android-room-with-a-view-kotlin/#10
 class ExerciseListAdapter internal constructor(
@@ -19,15 +18,13 @@ class ExerciseListAdapter internal constructor(
 ) : RecyclerView.Adapter<ExerciseListAdapter.ExerciseViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
-    private var exercises = emptyList<Exercise>()
+    var exercises = emptyList<Exercise>()
 
     inner class ExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.exerciseName)
         val sets: TextView = itemView.findViewById(R.id.exerciseSets)
         val reps: TextView = itemView.findViewById(R.id.exerciseReps)
-        val btn1: TextView = itemView.findViewById(R.id.rc_item_ex_btn1)
-        val btn2: TextView = itemView.findViewById(R.id.rc_item_ex_btn2)
-        val btn3: TextView = itemView.findViewById(R.id.rc_item_ex_btn3)
+        val weight: TextView = itemView.findViewById(R.id.exerciseWeight)
         val linLay: LinearLayout = itemView.findViewById(R.id.lin_lay_ex_btn)
     }
 
@@ -41,36 +38,40 @@ class ExerciseListAdapter internal constructor(
         holder.name.text = context.getString(R.string.exercise_name, current.name)
         holder.sets.text = context.getString(R.string.exercise_sets, current.sets)
         holder.reps.text = context.getString(R.string.exercise_reps, current. reps)
+        holder.weight.text = context.getString(R.string.exercise_weight, current.weight.toInt())
         holder.name.setOnClickListener {
             setSelected(current)
         }
-        /*val buttons = mutableListOf<TextView>()
-        for (i in 1..current.sets) run {
-            try {
-                val newBtn = TextView(ContextThemeWrapper(context, R.style.set_done_btn), null, 0)
-                val param: LinearLayout.LayoutParams =
-                    LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-                param.setMargins(10, 0, 10, 0)
-                newBtn.layoutParams = param
-                newBtn.tag = "rc_item_ex_btn$i"
-                buttons.add(newBtn)
-                holder.linLay.addView(newBtn)
-            } catch (e: Exception) {
-                throw e
-            }
-
-        }*/
-
-        val buttons = arrayOf(holder.btn1, holder.btn2, holder.btn3)
-        for (btn in buttons) {
-            btn.setOnClickListener {
-                when {
-                    btn.text == "" -> btn.text = current.reps.toString()
-                    btn.text.toString().toInt() != 0 -> btn.text = (btn.text.toString().toInt() - 1).toString()
-                    else -> btn.text = current.reps.toString()
+        if (holder.linLay.isEmpty()) {
+            val buttons = mutableListOf<TextView>()
+            for (i in 1..current.sets) run {
+                try {
+                    val newBtn = TextView(ContextThemeWrapper(context, R.style.set_done_btn), null, 0)
+                    val param: LinearLayout.LayoutParams =
+                        LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                    param.setMargins(10, 0, 10, 0)
+                    newBtn.layoutParams = param
+                    newBtn.tag = "rc_item_ex_btn$i"
+                    if (current.results[newBtn.tag.toString()] != null) {
+                        newBtn.text = current.results[newBtn.tag.toString()].toString()
+                    }
+                    buttons.add(newBtn)
+                    holder.linLay.addView(newBtn)
+                } catch (e: Exception) {
+                    throw e
                 }
             }
+            for (btn in buttons) {
+                btn.setOnClickListener {
+                    when {
+                        btn.text == "" -> btn.text = current.reps.toString()
+                        btn.text.toString().toInt() != 0 -> btn.text = (btn.text.toString().toInt() - 1).toString()
+                        else -> btn.text = current.reps.toString()
+                    }
+                    current.results[btn.tag.toString()] = btn.text.toString().toInt()
+                }
 
+            }
         }
     }
 

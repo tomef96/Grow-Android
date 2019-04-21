@@ -1,5 +1,6 @@
 package com.example.grow
 
+import com.example.grow.data.exercise.Exercise
 import org.junit.Test
 import org.junit.Assert.*
 import org.junit.Before
