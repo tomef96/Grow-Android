@@ -1,13 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="16dp"
     tools:context=".ui.nutrition.NutritionFragment">
-
-    <TextView
+    
+    <EditText
+        android:id="@+id/nutrition_search_edtTxt"
+        android:layout_margin="8dp"
+        android:hint="Food name eg. 'Chicken' or 'Pasta carbonara'"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="NutritionFragment" />
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/nutrition_search_btn"
+        android:layout_margin="8dp"
+        android:text="Search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_margin="8dp"
+        android:id="@+id/nutrition_label_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_margin="8dp"
+            android:id="@+id/nutrition_kcal_text"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:layout_margin="8dp"
+            android:id="@+id/nutrition_carbs_text"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:layout_margin="8dp"
+            android:id="@+id/nutrition_proteins_text"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:layout_margin="8dp"
+            android:id="@+id/nutrition_fat_text"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
-</FrameLayout>
+
+</LinearLayout>
