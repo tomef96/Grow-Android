@@ -5,20 +5,25 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.grow.data.user.User
+import com.example.grow.data.user.UserDao
 import com.example.grow.data.exercise.Exercise
 import com.example.grow.data.exercise.ExerciseDao
 import com.example.grow.data.workout.Workout
 import com.example.grow.data.workout.WorkoutDao
+import com.example.grow.data.workoutExercise.WorkoutExercise
+import com.example.grow.data.workoutExercise.WorkoutExerciseDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [Exercise::class, Workout::class, WorkoutExercise::class], version = 5, exportSchema = false)
+@Database(entities = [Exercise::class, Workout::class, WorkoutExercise::class, User::class], version = 6, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun exerciseDao(): ExerciseDao
     abstract fun workoutDao(): WorkoutDao
     abstract fun workoutExerciseDao(): WorkoutExerciseDao
+    abstract fun userDao(): UserDao
 
     // https://codelabs.developers.google.com/codelabs/android-room-with-a-view-kotlin/#6
     companion object {
@@ -54,6 +59,7 @@ abstract class AppDatabase : RoomDatabase() {
                     populateDatabase(database.exerciseDao())
                     populateDatabase(database.workoutDao())
                     populateDatabase(database.workoutExerciseDao())
+                    populateDatabase(database.userDao())
                 }
             }
         }
@@ -93,6 +99,13 @@ abstract class AppDatabase : RoomDatabase() {
             workoutExerciseDao.insert(workoutExercise)
             workoutExercise = WorkoutExercise(69, 69)
             workoutExerciseDao.insert(workoutExercise)
+        }
+
+        fun populateDatabase(userDao: UserDao) {
+            userDao.deleteAll()
+
+            val user = User(1, 178, 75, 82)
+            userDao.insert(user)
         }
     }
 

@@ -52,8 +52,8 @@ class ExerciseListAdapter internal constructor(
                     param.setMargins(10, 0, 10, 0)
                     newBtn.layoutParams = param
                     newBtn.tag = "rc_item_ex_btn$i"
-                    if (current.results[newBtn.tag.toString()] != null) {
-                        newBtn.text = current.results[newBtn.tag.toString()].toString()
+                    if (current.results[i] != null) {
+                        newBtn.text = current.results[i].toString()
                     }
                     buttons.add(newBtn)
                     holder.linLay.addView(newBtn)
@@ -68,7 +68,8 @@ class ExerciseListAdapter internal constructor(
                         btn.text.toString().toInt() != 0 -> btn.text = (btn.text.toString().toInt() - 1).toString()
                         else -> btn.text = current.reps.toString()
                     }
-                    current.results[btn.tag.toString()] = btn.text.toString().toInt()
+                    current.results[btn.tag.toString().last().toString().toInt()] = btn.text.toString().toInt()
+                    println(current.results)
                 }
 
             }

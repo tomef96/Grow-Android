@@ -14,7 +14,7 @@ data class Exercise(
 ) {
 
     @Ignore
-    var results = mutableMapOf<String, Int>()
+    var results = mutableMapOf<Int, Int>()
     @Ignore
     var weight: Double = 0.0
 
@@ -22,7 +22,7 @@ data class Exercise(
         if (!results.isNullOrEmpty()) {
             var result = false
             for (r in results) {
-                if (r.value == sets) result = true
+                if (r.value == reps) result = true
             }
             return result
         }

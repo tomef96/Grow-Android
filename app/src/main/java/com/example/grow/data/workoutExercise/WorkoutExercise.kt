@@ -1,4 +1,4 @@
-package com.example.grow.data
+package com.example.grow.data.workoutExercise
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

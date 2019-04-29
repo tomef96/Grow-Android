@@ -19,6 +19,7 @@ import com.example.grow.ui.exercise.ExerciseFragment
 class WorkoutFragment : Fragment() {
 
     lateinit var recyclerView: RecyclerView
+
     private lateinit var viewModel: WorkoutExerciseViewModel
 
     companion object {
@@ -27,10 +28,10 @@ class WorkoutFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val workoutID = arguments?.getInt("workoutID")
         viewModel = activity?.run {
             ViewModelProviders.of(this).get(WorkoutExerciseViewModel::class.java)
         }?: throw Exception("Invalid Activity")
-        val workoutID = arguments?.getInt("workoutID")
         viewModel.workoutID = workoutID!!
         activity?.setTitle(R.string.toolbar_title_workout)
     }
@@ -40,6 +41,7 @@ class WorkoutFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.workout_fragment, container, false)
+
         return view
     }
 
@@ -53,8 +55,8 @@ class WorkoutFragment : Fragment() {
         val adapter = ExerciseListAdapter(context!!, this::setSelected)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context!!)
-        viewModel.exercises?.observe(this, Observer { exercises ->
-            exercises.let {adapter.setExercises(it)}
+        viewModel.exercises.observe(this, Observer { exercises ->
+            exercises?.let { adapter.setExercises(it) }
         })
     }
 
@@ -67,6 +69,7 @@ class WorkoutFragment : Fragment() {
 
     interface OnWorkoutSelectedListener {
         fun onExerciseSelected(position: Int)
+        fun setSelected(id: Int)
     }
 
 }

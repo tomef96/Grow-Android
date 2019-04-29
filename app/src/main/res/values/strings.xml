@@ -7,4 +7,18 @@
     <string name="start_workout">Start Workout</string>
     <string name="toolbar_title_workout">Workout</string>
     <string name="toolbar_title_exercise">Exercise</string>
+    <string name="title_activity_navigation">NavigationActivity</string>
+    <string name="title_workout">Workout</string>
+    <string name="title_nutrition">Nutrition</string>
+    <string name="title_stats">Stats</string>
+
+    <string name="stats_height">Height</string>
+    <string name="stats_height_value">%1$dcm</string>
+    <string name="stats_weight">Weight</string>
+    <string name="stats_weight_value">%1$dkg</string>
+    <string name="stats_waist">Waist</string>
+    <string name="stats_waist_value">%1$dcm</string>
+    <string name="stats_estimated_bmr">Estimated BMR</string>
+    <string name="stats_edit">Edit</string>
+    <string name="stats_steps_taken_today">Steps taken today</string>
 </resources>

@@ -30,5 +30,10 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/detailedExerciseImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 
 </LinearLayout>

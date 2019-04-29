@@ -8,11 +8,18 @@ import com.example.grow.data.workout.Workout
  */
 class PersonalTrainer {
 
+    companion object {
+        val instance = PersonalTrainer()
+    }
+
     /**
      * Analyze the workout, getting an overview over results and trends
      */
     fun analyzeWorkout(workout: Workout) {
-
+        // Total weight lifted
+        // Time used
+        // Weight per minute
+        // Weight gain/loss
     }
 
     /**

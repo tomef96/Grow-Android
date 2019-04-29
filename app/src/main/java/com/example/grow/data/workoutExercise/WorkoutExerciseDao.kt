@@ -1,7 +1,6 @@
-package com.example.grow.data
+package com.example.grow.data.workoutExercise
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Query
 import com.example.grow.data.exercise.Exercise
